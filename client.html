@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Playground</title>
+</head>
+<body>
+  <div id="data-parent"></div>
+  <button onclick="myFunction()">Click me</button>
+</body>
+<script>
+
+const ws = new WebSocket('ws://localhost:9898/');
+
+ws.onopen = function() {
+    // console.log('WebSocket Client Connected', (new Date()).getMilliseconds());
+    ws.send(JSON.stringify({ user: { id: parseInt((Math.random() * 10) % 10), name: "deepak" }, data: { id: 1, message: "helo" } }));
+};
+
+ws.onmessage = function(e) {
+  let dataChild = document.createElement("div");
+  dataChild.appendChild(document.createTextNode(e.data))
+  document.getElementById("data-parent").appendChild(dataChild);
+  // document.getElementById("data").innerHTML = e.data;
+  console.log("Received: '" + e.data + "'", (new Date()).getMilliseconds());
+};
+
+myFunction = function(){
+  console.log(  );
+}
+
+</script>
+</html>
